@@ -1,33 +1,24 @@
 # QuietScreen — Information Without the Noise
 
-A responsive frontend implementation of the supplied **Async Labs T5** product brief: a
-marketing site for a smart 7.5-inch e-ink workspace display that keeps chosen information
-visible on a desk or wall, managed from a companion app.
+A responsive frontend built for the Async Labs T5 screening task.
 
-The site is built around one idea — *the screen that doesn't want your attention* — and every
-claim on the page traces back to the brief. No pricing, statistics, testimonials or hardware
-specifications have been invented.
-
-**Live demo:** ADD_AFTER_DEPLOYMENT
+QuietScreen is a concept for a 7.5-inch e-ink workspace display that keeps useful information visible without becoming another distracting screen.
 
 ## Features
 
-- Responsive marketing landing page (phone, tablet, desktop)
-- React + TypeScript, strict mode, no `any`
-- Reusable component architecture — sections compose shared primitives
-- Data-driven e-ink product renderer: screens are typed data, not markup
-- Focus, Shared Space and Home use cases
+- Responsive design for desktop, tablet and mobile
+- Light and dark mode
+- Interactive e-ink display
+- Focus, Shared Space and Home screens
 - Restaurant Menu use case
-- **College Manager** — featured personal use case
-- **Gym Tracker** — sample personal use case
-- Light / dark website theme, persisted, with system default
-- Full-screen product viewer
+- College Manager — featured personal use case
+- Gym Tracker — sample personal use case
+- Full-screen product view
+- B&W and tri-colour display variants
 - Responsive mobile navigation
-- Black-and-white / tri-colour display variants
-- Accessible keyboard interactions throughout
-- Reduced-motion support
+- Keyboard-accessible interactions
 
-## Tech stack
+## Tech Stack
 
 - React
 - TypeScript
@@ -35,81 +26,72 @@ specifications have been invented.
 - CSS Modules
 - Lucide React
 
-No UI kit, no state library, no animation library.
+## Project Structure
 
-## Architecture
-
-```
+```text
 src/
 ├── components/
-│   ├── ui/        Reusable UI primitives (Container, Section, SectionHeader, Button)
-│   ├── layout/    Header, mobile navigation and footer
-│   ├── sections/  Landing-page sections
-│   └── product/   Reusable physical product / e-ink rendering
-├── data/          Data-driven screen layouts and page content
-├── hooks/         Small reusable hooks for genuine external behaviour
+│   ├── ui/        Reusable UI components
+│   ├── layout/    Header, navigation and footer
+│   ├── sections/  Landing page sections
+│   └── product/   Device and e-ink display components
+├── data/          Product and screen data
+├── hooks/         Reusable React hooks
 ├── styles/        Global styles and design tokens
-└── types/         Domain TypeScript types
-```
+└── types/         TypeScript types
 
-**The product display is implemented once through reusable `DeviceFrame` / `EInkScreen`
-components and reused across the hero, use cases and full-screen viewer.**
+The product display uses reusable DeviceFrame and EInkScreen components. Different use cases are represented as data and rendered using the same components.
 
-`EInkScreen` renders any `ScreenLayout` without knowing what is in it. A screen is described as
-data — rows of widgets on a twelve-column grid — and widgets are a discriminated union, so
-adding a widget kind without rendering it is a compile error rather than a blank panel. Six use
-cases therefore share a single renderer with no duplicated device markup.
+My Use Cases
+College Manager
 
-Design values live only in `styles/tokens.css`; no component contains a raw colour, size or
-spacing value. Dark mode re-points those same tokens rather than introducing a second system.
-The device and its panel are deliberately excluded from that re-pointing: the hardware does not
-change colour because the website did.
+This is the use case I would personally use the display for.
 
-## Run locally
+It could show my timetable, next class, upcoming submissions, tests, exams and important reminders without constantly checking my phone or laptop.
 
-```bash
+Gym Tracker
+
+A sample fitness dashboard showing workouts, calories, upcoming exercises and personal records.
+
+Both are demonstration screens using sample data and are not connected to external accounts or APIs.
+
+Design Approach
+
+I wanted the website to feel calm and product-focused rather than like a typical SaaS landing page.
+
+The design uses:
+
+Warm off-white and charcoal tones
+A restrained red accent
+Minimal borders and shadows
+Large typography and generous spacing
+Responsive layouts
+
+The website also supports dark mode while keeping the e-ink display visually consistent with the physical product.
+
+Run Locally
 npm install
 npm run dev
-```
 
-Production build and lint:
+For a production build:
 
-```bash
 npm run build
 npm run lint
-```
+Live Demo
 
-## Design approach
+[Add Vercel URL here]
 
-- A calm, editorial hardware aesthetic rather than a generic SaaS landing page
-- Warm off-white ground with charcoal ink, taken from the supplied product reference
-- One restrained brick-red accent, used to mark live state rather than for decoration
-- Separation by hairline rules and surface contrast — no gradients, one shadow, used only to
-  lift the product render off the page
-- Responsive-first: phone, tablet and desktop are composed intentionally, not scaled
-- Semantic HTML, one `<h1>`, labelled landmarks and sections
-- Keyboard-operable tabs and dialogs, focus never suppressed, focus returned on close
-- `prefers-reduced-motion` honoured globally
-- Repeated content is data-driven; abstractions exist only where there is real repetition
+Screening Task
 
-## Product thinking
+Async Labs — T5 Website Frontend Development
 
-The featured use case is **College Manager**: the display sitting on a student's desk showing
-the day's timetable, the next class, an upcoming submission, a test and an exam, plus one
-important reminder — the things that go wrong when they live only in a group chat. **Gym
-Tracker** shows the same hardware as a training board: today's session, what is next, and
-personal records worth seeing between sets.
 
-Both are demonstration use cases built from sample content. They are not connected to any
-account, tracker, timetable system or API — they illustrate what a person could choose to put
-on the display.
+### One thing I would add
 
-The site also separates what the brief supports from what it does not. Capabilities such as
-custom layouts, templates, the companion app, calendar and status integrations, scheduling and
-desk-or-wall placement are stated confidently. Ideas beyond the brief — adaptive brightness, an
-optional stylus — appear in a clearly marked *Designed to evolve* section as concepts, never as
-specifications.
+Since this is a **screening submission**, after deployment put both links near the top:
 
-## Screening task
+```markdown
+**Live Demo:** https://your-vercel-url.vercel.app  
+**GitHub:** https://github.com/KrishnaRaghavendra05/QuiteScreen-Async-Labs-Screening
 
-Async Labs — T5 Website Frontend Development.
+That makes it extremely easy for the evaluator to find the two things they actually care about.
