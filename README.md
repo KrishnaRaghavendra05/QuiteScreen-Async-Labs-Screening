@@ -1,54 +1,14 @@
-# QuietScreen — Information Without the Noise
+# Async Labs T5 — QuietScreen
 
-A responsive frontend built for the **Async Labs T5 Website Frontend Development** screening task.
+**Name:** Krishna Raghavendra
 
-QuietScreen is a concept for a 7.5-inch e-ink workspace display that keeps useful information visible without becoming another distracting screen.
+## What I Built
 
----
+QuietScreen is a responsive frontend concept for a 7.5-inch e-ink workspace display that keeps useful information visible without becoming another distracting screen.
 
-## Features
+I built the interface using React and TypeScript with reusable components, data-driven e-ink screens, responsive layouts, light/dark themes, interactive use cases, and an accessible full-screen product viewer. The project includes sample use cases such as College Manager, Gym Tracker, and Restaurant Menu.
 
-- Responsive design for desktop, tablet, and mobile
-- Light and dark mode
-- Interactive e-ink product display
-- Focus, Shared Space, and Home screens
-- Restaurant Menu use case
-- **College Manager** — featured personal use case
-- **Gym Tracker** — sample personal use case
-- Full-screen product viewer
-- Black-and-white and tri-colour display variants
-- Responsive mobile navigation
-- Keyboard-accessible interactions
-- Accessibility and reduced-motion support
-
----
-
-## Tech Stack
-
-- React
-- TypeScript
-- Vite
-- CSS Modules
-- Lucide React
-
-No UI framework, state management library, or animation library was used.
-
----
-
-## Project Structure
-
-```text
-src/
-├── components/
-│   ├── ui/        Reusable UI components
-│   ├── layout/    Header, navigation, and footer
-│   ├── sections/  Landing page sections
-│   └── product/   Device and e-ink display components
-├── data/          Product and screen data
-├── hooks/         Reusable React hooks
-├── styles/        Global styles and design tokens
-└── types/         TypeScript types
-## Links
+## How to View
 
 **Live Demo:**  
 https://quite-screen-async-labs-screening.vercel.app/
@@ -56,10 +16,26 @@ https://quite-screen-async-labs-screening.vercel.app/
 **GitHub Repository:**  
 https://github.com/KrishnaRaghavendra05/QuiteScreen-Async-Labs-Screening
 
----
+## How to Run Locally
 
-## Screening Task
+```bash
+npm install
+npm run dev
 
-**Async Labs — T5 Website Frontend Development**
+For a production build:
 
-Built as a frontend implementation of the supplied product brief, with a focus on responsive design, reusable components, accessibility, and product presentation.
+npm run build
+Important Files
+src/components/product/ — reusable product and e-ink display components
+src/components/sections/ — landing page sections
+src/data/ — screen layouts and use-case data
+src/hooks/ — reusable React hooks
+src/styles/ — global styles and design tokens
+screenshots/ — submission screenshots
+Tools Used
+
+React, TypeScript, Vite, CSS Modules, Lucide React
+
+Screening Task
+
+Async Labs — T5 Website Frontend Development
