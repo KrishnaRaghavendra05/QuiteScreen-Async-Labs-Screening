@@ -1,0 +1,97 @@
+﻿/*
+ * The display surface.
+ *
+ * Sizing: one base font size, derived from the device's width via container
+ * query units, and every size inside the panel expressed in `em` against it.
+ * The panel therefore scales as a single object the way a fixed-resolution
+ * screen does, instead of reflowing like a web page.
+ *
+ * Scaling is strictly proportional — no clamp floor. A floor would inflate the
+ * type at small sizes and push content past the fixed 5:3 aperture, so the
+ * panel gets smaller rather than more crowded, exactly as the physical object
+ * does. At the reference size this lands at about 11px, matching the supplied
+ * product photography.
+ */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0.95em;
+  border: 1px solid var(--device-edge);
+  border-radius: 1cqw;
+  aspect-ratio: 5 / 3;
+  background-color: var(--eink-paper);
+  color: var(--eink-ink);
+  font-size: 0.75rem; /* fallback where container query units are unsupported */
+  font-size: 2cqw;
+  gap: 0.7em;
+
+  /* Black-and-white is the default panel: the accent resolves to plain ink,
+   * so nothing needs a second code path. */
+  --eink-accent: var(--eink-ink);
+
+  /* Rules and box outlines sit lighter than body text, mixed from the existing
+   * palette rather than introduced as a new colour. */
+  --eink-rule: color-mix(in srgb, var(--eink-mid) 45%, var(--eink-paper));
+}
+
+/* The panel's own red, not the site accent - the hardware does not retheme. */
+.screen[data-variant="tri-color"] {
+  --eink-accent: var(--eink-accent-red);
+}
+
+.row {
+  display: grid;
+  align-items: start;
+  gap: 0.6em 0.9em;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.rowDivided {
+  padding-top: 0.6em;
+  border-top: 1px solid var(--eink-rule);
+}
+
+/* Spans are a closed set in `GridSpan`, so they map to rules rather than to an
+ * inline style that would need a cast to carry a custom property. */
+.slot[data-span="4"] {
+  grid-column: span 4;
+}
+
+.slot[data-span="5"] {
+  grid-column: span 5;
+}
+
+.slot[data-span="6"] {
+  grid-column: span 6;
+}
+
+.slot[data-span="7"] {
+  grid-column: span 7;
+}
+
+.slot[data-span="8"] {
+  grid-column: span 8;
+}
+
+.slot[data-span="12"] {
+  grid-column: span 12;
+}
+
+/* The hairline box the reference screen draws around some widgets. */
+.slotFramed {
+  padding: 0.55em 0.7em;
+  border: 1px solid var(--eink-rule);
+  border-radius: var(--radius-sm);
+}
+
+.footer {
+  color: var(--eink-mid);
+  font-size: 0.72em;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-align: right;
+  text-transform: uppercase;
+}

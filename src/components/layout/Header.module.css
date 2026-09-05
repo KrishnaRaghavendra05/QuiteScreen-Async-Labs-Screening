@@ -1,0 +1,134 @@
+.header {
+  position: sticky;
+  z-index: var(--z-header);
+  top: 0;
+  border-bottom: var(--border-width) solid transparent;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+}
+
+/* Separation on scroll comes from a surface and a hairline, not a shadow. */
+.header[data-scrolled="true"] {
+  border-bottom-color: var(--border);
+  background-color: var(--bg);
+}
+
+.bar {
+  display: flex;
+  height: var(--header-height);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.brand {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.wordmark {
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-xs);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Sits under the product name at a whisper, so it never competes with it.
+ * Small enough to stay on one line at 320px. */
+.byline {
+  color: var(--ink-muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.nav {
+  display: none;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.link {
+  position: relative;
+  color: var(--ink-muted);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+/* Underline grows from the left on hover - a transform, so it stays cheap. */
+.link::after {
+  position: absolute;
+  bottom: -0.35em;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentcolor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration) var(--ease);
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cta {
+  display: none;
+}
+
+/* Shared by the theme switch and the menu toggle. */
+.iconButton {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  color: var(--ink);
+  place-items: center;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.iconButton:hover {
+  color: var(--accent);
+}
+
+.menuToggle {
+  margin-right: calc(var(--space-3) * -1);
+}
+
+/* The navigation needs room for four links plus a call to action, which it
+ * does not have until 1024px. Collapsing earlier is deliberate. */
+@media (min-width: 1024px) {
+  .nav {
+    display: block;
+  }
+
+  .cta {
+    display: inline-flex;
+  }
+
+  .menuToggle {
+    display: none;
+  }
+}

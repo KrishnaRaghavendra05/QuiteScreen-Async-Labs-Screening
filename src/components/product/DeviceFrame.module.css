@@ -1,0 +1,90 @@
+/*
+ * The physical product.
+ *
+ * Geometry is taken from the supplied prototype photograph, which the brief
+ * designates as the reference for the product's form, proportions, frame and
+ * desk-standing configuration:
+ *
+ *   - landscape, with a 5:3 screen aperture (measured from the photograph at
+ *     1.43:1 and corrected for its ~30 degree yaw)
+ *   - an even bezel on the top and sides
+ *   - a deeper bottom bezel carrying the embossed wordmark
+ *   - softly rounded outer corners, a barely rounded aperture
+ *   - matte charcoal, uniform, no gloss
+ *
+ * Every dimension is a container query unit, so the whole object scales
+ * proportionally and can never be distorted by its container.
+ *
+ * Nothing is drawn that is not visible in that photograph: no ports, buttons,
+ * LEDs, sensors, cameras or vents.
+ */
+
+.device {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+/* Sizes are a closed set in `DeviceSize`, so they map to attribute rules and
+ * keep the numbers in the stylesheet rather than in the component. */
+.device[data-size="sm"] {
+  max-width: 15rem;
+}
+
+.device[data-size="md"] {
+  max-width: 24rem;
+}
+
+.device[data-size="lg"] {
+  max-width: 34rem;
+}
+
+/* Only used by the full-screen viewer, where the panel is meant to be read.
+ * The viewer's own padding decides how much width it actually gets. */
+.device[data-size="xl"] {
+  max-width: 62rem;
+}
+
+.frame {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 5.6cqw 5.6cqw 0;
+  /* Invisible against the light page, and the thing that keeps the silhouette
+   * readable when the site is in dark mode. */
+  border: 1px solid var(--device-edge);
+  border-radius: 3.6cqw;
+  background-color: var(--device);
+
+  /* The one shadow in the system. It exists to separate a dark object from a
+   * warm off-white ground; it is a product-render treatment and is not
+   * available to cards, buttons or panels. */
+  box-shadow: var(--shadow-device);
+}
+
+/* The embossed wordmark, sitting in the deeper bottom bezel. Rendered a shade
+ * lighter than the frame to read as relief rather than as print — it is
+ * decorative and hidden from assistive technology, so the low contrast is the
+ * point rather than an oversight. */
+.wordmark {
+  padding-block: 1.5cqw 3.4cqw;
+  color: var(--device-edge);
+  font-size: 2.6cqw;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+}
+
+/* The fold-out stand. Seen straight on it is only the foot that shows beneath
+ * the device, so it is drawn in the frame's own colour as a small protrusion
+ * rather than as a separate part. */
+.stand {
+  width: 17%;
+  height: 1.1cqw;
+  border-radius: 0 0 0.8cqw 0.8cqw;
+  background-color: var(--device);
+}

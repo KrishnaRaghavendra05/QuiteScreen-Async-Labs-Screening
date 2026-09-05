@@ -1,0 +1,21 @@
+.header {
+  max-width: 44ch;
+  margin-bottom: var(--space-12);
+}
+
+.eyebrow {
+  margin-bottom: var(--space-4);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-xs);
+  line-height: var(--lh-xs);
+  text-transform: uppercase;
+}
+
+.lede {
+  margin-top: var(--space-5);
+  color: var(--body-color, var(--ink-muted));
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
+}

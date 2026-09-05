@@ -1,0 +1,49 @@
+/*
+ * Colours read from inheritable custom properties with light-theme fallbacks,
+ * so a button placed on the inverse band picks up the right treatment without
+ * a variant of its own.
+ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-pill);
+  font-weight: var(--fw-semibold);
+  text-align: center;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.button[data-size="md"] {
+  min-height: 2.75rem; /* 44px touch target */
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--fs-sm);
+}
+
+.button[data-size="lg"] {
+  min-height: 3.25rem;
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--fs-body);
+}
+
+.button[data-variant="primary"] {
+  background-color: var(--cta-solid-bg, var(--ink));
+  color: var(--cta-solid-fg, var(--bg));
+}
+
+.button[data-variant="primary"]:hover {
+  background-color: var(--cta-solid-hover, var(--accent));
+}
+
+.button[data-variant="secondary"] {
+  border-color: var(--cta-outline-border, var(--border-strong));
+  color: var(--cta-outline-fg, var(--ink));
+}
+
+.button[data-variant="secondary"]:hover {
+  border-color: var(--cta-outline-fg, var(--ink));
+}

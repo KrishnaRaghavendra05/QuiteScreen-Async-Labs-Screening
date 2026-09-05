@@ -1,0 +1,163 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+/* ---------------------------------------------------------------- *
+ * Tabs
+ * ---------------------------------------------------------------- */
+
+/* Mobile and tablet: a horizontal row that scrolls, since five chips do not
+ * fit a phone. Snapping makes them easier to land on with a thumb. */
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+  gap: var(--space-2);
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  padding: var(--space-2) var(--space-5);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--ink-muted);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  scroll-snap-align: start;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.tab:hover {
+  color: var(--ink);
+}
+
+/* Selection is carried by fill, border and weight together, so it survives
+ * without colour perception. */
+.tab[aria-selected="true"] {
+  border-color: var(--ink);
+  background-color: var(--ink);
+  color: var(--bg);
+  font-weight: var(--fw-semibold);
+}
+
+/* ---------------------------------------------------------------- *
+ * Copy
+ * ---------------------------------------------------------------- */
+
+.copy {
+  margin-top: var(--space-8);
+  animation: enter var(--duration) var(--ease);
+}
+
+/* Marks the author's own use case. Text, not just a colour. */
+.featured {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-width) solid var(--accent);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-3);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-xs);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: var(--fs-h3);
+}
+
+.description {
+  max-width: 42ch;
+  margin-top: var(--space-3);
+  color: var(--ink-muted);
+}
+
+.expand {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  margin-top: var(--space-5);
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  gap: var(--space-2);
+}
+
+.expand:hover {
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- *
+ * Device
+ * ---------------------------------------------------------------- */
+
+/* `width: 100%` is load-bearing. The device declares `container-type:
+ * inline-size`, so its own width cannot come from its contents. Left to
+ * shrink-to-fit - which is what the auto inline margin below causes on a grid
+ * item - the whole product render collapses to zero. */
+.stage {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+.device {
+  animation: enter var(--duration) var(--ease);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (min-width: 640px) {
+  /* From tablet up there is room to wrap, which is easier to select from than
+   * a scrolling row. The phone keeps the scroller. */
+  .tabs {
+    overflow: visible;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+  }
+
+  .stage {
+    max-width: 30rem;
+    margin-inline: auto;
+  }
+}
+
+/* Desktop: controls beside the device, tabs stacked into a vertical list so
+ * the selected label sits next to the screen it describes. */
+@media (min-width: 1024px) {
+  .layout {
+    display: grid;
+    align-items: center;
+    gap: var(--space-16);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+
+  .tabs {
+    overflow: visible;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 0;
+  }
+
+  .stage {
+    max-width: none;
+    margin-inline: 0;
+  }
+}

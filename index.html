@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#f3f1ee" />
+
+    <title>QuietScreen — Information Without the Noise</title>
+    <meta
+      name="description"
+      content="A 7.5-inch low-power workspace display that keeps your calendar, tasks and status visible on your desk or wall — managed from a companion app, running about 30 days on a charge."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      /*
+       * Stamps the theme before first paint so the page never flashes the wrong
+       * one. Mirrors the rule in src/hooks/useTheme.ts: a saved choice wins,
+       * and the system preference only decides the first visit.
+       */
+      (function () {
+        try {
+          var saved = localStorage.getItem("quietscreen-theme");
+          var theme =
+            saved === "light" || saved === "dark"
+              ? saved
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.dataset.theme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

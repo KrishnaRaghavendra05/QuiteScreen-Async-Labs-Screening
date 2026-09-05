@@ -1,0 +1,109 @@
+/*
+ * Global element defaults and the handful of cross-cutting behaviours that are
+ * genuinely page-wide. Everything else is scoped in a CSS Module.
+ */
+
+html {
+  /* Anchor links must not land underneath the sticky header. */
+  scroll-padding-top: calc(var(--header-height) + var(--space-4));
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink-body);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+}
+
+/* Headings inherit scale from tokens; components choose which level to use. */
+h1,
+h2,
+h3,
+h4 {
+  color: var(--heading-color, var(--ink));
+  font-weight: var(--fw-bold);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/*
+ * One focus treatment for the whole site, defined once. Never removed -
+ * components may reposition the ring with `outline-offset`, not disable it.
+ */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/*
+ * Skip link: the first focusable element on the page. Visually hidden until
+ * focused, then pinned to the top-left.
+ */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: var(--z-menu);
+  padding: var(--space-3) var(--space-5);
+  transform: translateY(calc(-100% - var(--space-4)));
+  border-radius: var(--radius-md);
+  background-color: var(--ink);
+  color: var(--bg);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  transition: transform var(--duration) var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Hold the page still while the modal navigation is open. */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/*
+ * Motion is decorative throughout this site - nothing depends on it to convey
+ * meaning - so it is disabled wholesale rather than tuned per component.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

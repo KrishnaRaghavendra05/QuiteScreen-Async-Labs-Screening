@@ -1,0 +1,224 @@
+/*
+ * Design tokens — the single source of truth for the visual system.
+ *
+ * Values are sampled from the supplied Async Labs product reference material.
+ * The reference language is flat and editorial: a warm off-white ground,
+ * near-black ink, hairline borders, and one restrained brick red reserved for
+ * live state. There are no gradients and no decorative shadows anywhere in it.
+ * Those two absences are enforced below and must not be reintroduced.
+ *
+ * Nothing outside this file should contain a raw colour, font size, radius or
+ * spacing value.
+ */
+
+:root {
+  /* ------------------------------------------------------------------ *
+   * Colour — surfaces
+   * ------------------------------------------------------------------ */
+  --bg: #f3f1ee; /* page ground, warm off-white */
+  --surface: #f8f6f3; /* cards and panels, lifted off the ground */
+  --surface-sunken: #ece4d8; /* warm sand, used sparingly for emphasis */
+
+  /* Colour — ink */
+  --ink: #1c1c1b; /* headings */
+  --ink-body: #34332f; /* body copy */
+  --ink-muted: #605f5c; /* secondary and supporting copy */
+
+  /* Colour — lines
+   * Separation in this system comes from borders and surface contrast,
+   * never from shadow. */
+  --border: #e0dcd5;
+  --border-strong: #cbc6bd;
+
+  /* Colour — accent
+   * Brick red, matching the tri-color e-ink accent. It marks what is
+   * happening *now* (live status, today, active state). It is not a
+   * general-purpose emphasis colour. */
+  --accent: #8e2921;
+  --accent-soft: #f3e4e1;
+  /* Amber is the second e-ink accent. It fails contrast on light grounds and
+   * is therefore decorative only — it must never carry text. */
+  --accent-amber: #d9a03c;
+
+  /* Colour — physical device */
+  --device: #212121; /* bezel face */
+  --device-edge: #2e2e2c; /* bezel highlight edge */
+
+  /* Colour — e-ink screen
+   * The device screen is rendered in the DOM rather than shipped as images,
+   * so it needs its own small, closed palette. */
+  --eink-paper: #f1eeeb;
+  --eink-ink: #1a1a19;
+  --eink-mid: #8a8880;
+
+  /* The panel's own red, held apart from the site accent so that retheming the
+   * page can never restyle the hardware. These five, plus --device and
+   * --device-edge above, are deliberately absent from the dark theme: the
+   * panel is a physical object, and its paper does not turn black because the
+   * website did. */
+  --eink-accent-red: #8e2921;
+
+  /* Colour — inverted section (the single dark CTA band)
+   * Derived from --inverse-bg; all four are verified for AA contrast. */
+  --inverse-bg: #171715;
+  --inverse-ink: #f5f3f0;
+  --inverse-ink-muted: #a8a49d;
+  --inverse-border: #35342f;
+
+  /* Colour — focus. Deliberately the accent, so focus reads as "live". */
+  --focus-ring: var(--accent);
+
+  /* ------------------------------------------------------------------ *
+   * Typography
+   * One family throughout, matching the reference. Hierarchy comes from
+   * scale and weight, never from colour.
+   * ------------------------------------------------------------------ */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Fluid where the size genuinely needs to bridge 360px and 1440px, fixed
+   * where it does not. Tracking tightens as size grows. */
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
+  --lh-display: 1.04;
+  --ls-display: -0.03em;
+
+  --fs-h2: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+  --lh-h2: 1.12;
+  --ls-h2: -0.02em;
+
+  --fs-h3: 1.125rem;
+  --lh-h3: 1.3;
+  --ls-h3: -0.01em;
+
+  --fs-lede: clamp(1rem, 0.95rem + 0.35vw, 1.25rem);
+  --lh-lede: 1.55;
+
+  --fs-body: 1rem;
+  --lh-body: 1.6;
+
+  --fs-sm: 0.875rem;
+  --lh-sm: 1.5;
+
+  /* Uppercase eyebrows and labels. */
+  --fs-xs: 0.75rem;
+  --lh-xs: 1.4;
+  --ls-xs: 0.06em;
+
+  /* ------------------------------------------------------------------ *
+   * Space — 4px base
+   * ------------------------------------------------------------------ */
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-32: 8rem; /* 128px */
+
+  /* Rhythm: vertical padding of a section, and the page's side gutter. */
+  --section-y: clamp(4rem, 3rem + 4vw, 7.5rem);
+  --gutter: clamp(1.25rem, 1rem + 2vw, 2.5rem);
+
+  /* ------------------------------------------------------------------ *
+   * Shape
+   * ------------------------------------------------------------------ */
+  --radius-sm: 4px; /* inner cards on the e-ink screen */
+  --radius-md: 8px; /* buttons, chips */
+  --radius-lg: 12px; /* cards, panels */
+  --radius-xl: 20px; /* device bezel */
+  --radius-pill: 999px;
+
+  --border-width: 1px;
+
+  /* Elevation — intentionally a single token.
+   *
+   * The reference uses no shadows at all. This one exists solely to lift the
+   * physical product render off the page ground, because a dark device on a
+   * warm off-white field otherwise reads as a flat sticker. It is a product-
+   * render treatment, NOT a design-system pattern: cards, buttons, panels and
+   * the header must separate using --border and surface contrast instead. */
+  --shadow-device: 0 24px 60px -24px rgb(28 28 27 / 28%);
+
+  /* ------------------------------------------------------------------ *
+   * Layout
+   * ------------------------------------------------------------------ */
+  --container: 1200px;
+  --container-narrow: 760px;
+  --header-height: 4.5rem; /* 72px */
+
+  /* ------------------------------------------------------------------ *
+   * Motion
+   * Transitions are limited to transform and opacity so they stay cheap.
+   * Every use is disabled under prefers-reduced-motion (see global.css).
+   * ------------------------------------------------------------------ */
+  --duration-fast: 150ms;
+  --duration: 220ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  /* ------------------------------------------------------------------ *
+   * Stacking — only the two layers that genuinely overlap content.
+   * ------------------------------------------------------------------ */
+  --z-header: 100;
+  --z-menu: 200;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 3.75rem; /* 60px */
+  }
+}
+
+/*
+ * Dark theme.
+ *
+ * The same token names, re-pointed - there is no second system, and no
+ * component knows a theme exists.
+ *
+ * It is composed rather than inverted:
+ *   - the ground is a warm near-black, keeping the paper-and-ink character
+ *     rather than going cold and blue;
+ *   - the accent lifts to a lighter brick so it still reads as the same red
+ *     while clearing contrast on a dark ground;
+ *   - the closing band flips the other way, to light. It is the page's one
+ *     reversal, and it should stay a reversal in either theme instead of
+ *     quietly merging into the background;
+ *   - the device and its panel are untouched.
+ *
+ * `data-theme` is stamped on <html> before first paint by the inline script in
+ * index.html, so there is no flash of the wrong theme.
+ */
+:root[data-theme="dark"] {
+  --bg: #161513;
+  --surface: #1e1d1a;
+  --surface-sunken: #2a2721;
+
+  --ink: #f4f2ee;
+  --ink-body: #dad7d0;
+  --ink-muted: #a09b91;
+
+  --border: #302e2a;
+  --border-strong: #46433c;
+
+  --accent: #d97b6c;
+  --accent-soft: #2e1b18;
+
+  /* The closing band becomes the light one. */
+  --inverse-bg: #efede8;
+  --inverse-ink: #1c1c1b;
+  --inverse-ink-muted: #57544e;
+  --inverse-border: #d8d4cc;
+
+  /* A dark object on a dark ground needs a deeper, softer contact shadow. */
+  --shadow-device: 0 28px 70px -28px rgb(0 0 0 / 70%);
+}

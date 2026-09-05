@@ -1,0 +1,29 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+/* Tones separate by background and hairline only - never by shadow. */
+.section[data-tone="surface"] {
+  border-block: var(--border-width) solid var(--border);
+  background-color: var(--surface);
+}
+
+.section[data-tone="inverse"] {
+  background-color: var(--inverse-bg);
+  color: var(--inverse-ink-muted);
+
+  /* Buttons and headings inside read these, so no component needs to know it
+   * is sitting on a dark band. */
+  --heading-color: var(--inverse-ink);
+  --body-color: var(--inverse-ink-muted);
+  --rule-color: var(--inverse-border);
+  --cta-solid-bg: var(--inverse-ink);
+  --cta-solid-fg: var(--inverse-bg);
+  --cta-outline-fg: var(--inverse-ink);
+  --cta-outline-border: var(--inverse-border);
+  --focus-ring: var(--inverse-ink);
+}
+
+.section[data-tone="inverse"] :is(h1, h2, h3) {
+  color: var(--inverse-ink);
+}
